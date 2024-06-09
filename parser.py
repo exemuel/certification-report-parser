@@ -1,10 +1,10 @@
 import os
 import numpy as np
 import pandas as pd
-import fitz
+import pymupdf
 
 def extract_text(path_pdf):
-    doc = fitz.open(path_pdf)
+    doc = pymupdf.open(path_pdf)
     
     page = doc.load_page(1)
     text = page.get_text()
@@ -83,9 +83,9 @@ df_summary['Program'] = np.where(df_summary['Program'] == df_summary['Program Se
 df_summary.drop(['Program Sertifikasi'], inplace=True, axis=1)
 
 try:
-    # df_summary.to_excel('summary.xlsx',
-    #                     sheet_name='summary')
-    print(df_summary)
+    df_summary.to_excel('summary.xlsx',
+                        sheet_name='summary')
+    # print(df_summary)
     print("Success")
 except:
     print("Failed")
